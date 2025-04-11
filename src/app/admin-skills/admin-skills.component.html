@@ -1,0 +1,50 @@
+<div class="container color-light">
+  <div class="col">
+    <div class="form-box">
+      <h2 class="header-title">💡 Skills</h2>
+      <form>
+        <input 
+          type="text" 
+          class="form-input" 
+          name="name" 
+          placeholder="Skill name" 
+          [(ngModel)]="mySkills.name"
+        >
+        <input 
+          type="number" 
+          class="form-input" 
+          name="percentage" 
+          placeholder="Percentage" 
+          [(ngModel)]="mySkills.percentage"
+        >
+        <button 
+          type="button" 
+          class="btn btn-primary" 
+          (click)="AgregarSkill()"
+        >
+          {{ btntxt }}
+        </button>
+      </form>
+    </div>
+
+    <!-- Aquí lo colocamos dentro de la misma columna, debajo -->
+    <div 
+      class="item-box" 
+      *ngFor="let skill of skillsList"
+    >
+      <p><strong>"{{ skill.name }}"</strong> - {{ skill.percentage }}%</p>
+      <button 
+        class="btn btn-warning" 
+        (click)="confirmEdit(skill)"
+      >
+        Editar
+      </button>
+      <button 
+        class="btn btn-danger" 
+        (click)="confirmDelete(skill.id)"
+      >
+        Eliminar
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="form-card">
+    <h2 class="section-title">📜 Certificates</h2>
+    <form>
+      <input type="text" class="form-input" name="title" placeholder="Certificate Title" [(ngModel)]="myCertificate.title"><br>
+      <input type="number" class="form-input" name="year" placeholder="Year" [(ngModel)]="myCertificate.year"><br>
+      <button type="button" class="btn btn-primary" (click)="AgregarCertificate()">{{ btntxt }}</button>
+    </form>
+  </div>
+
+  <div *ngFor="let cert of certificatesList" class="entry-card">
+    <p><strong>"{{ cert.title }}"</strong> - {{ cert.year }}</p>
+    <div class="btn-group">
+      <button class="btn btn-warning" (click)="confirmEdit(cert)">Edit</button>
+      <button class="btn btn-danger" (click)="confirmDelete(cert.id)">Delete</button>
+    </div>
+  </div>
+</div>

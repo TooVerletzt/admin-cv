@@ -1,0 +1,116 @@
+/* Asegura que no haya márgenes ni rellenos en el body */
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh; /* Asegura que el contenido ocupe toda la altura de la ventana */
+}
+
+/* Contenedor principal */
+.container {
+    display: flex;
+    justify-content: flex-start;  /* Alinea todo al inicio */
+    align-items: flex-start; /* Alinea todo al inicio de la pantalla */
+    padding: 0; /* Elimina el relleno en la parte superior */
+    height: 100%; /* Asegura que ocupe toda la altura disponible */
+}
+
+/* Fondo de color para toda la página */
+.color-light {
+    background-color: #e7f7ff;
+    min-height: 100vh; /* Mantén el fondo cubriendo toda la altura de la ventana */
+}
+
+/* Columna principal */
+.col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+/* Caja del formulario */
+.form-box {
+    background: white;
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+    margin-top: 2rem; /* Añadir separación superior */
+}
+
+/* Estilo del título */
+.header-title {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+/* Estilo de los campos de entrada */
+.form-input {
+    width: 100%;
+    padding: 0.7rem;
+    margin-bottom: 1rem;
+    border: 2px solid #1e293b;
+    border-radius: 0.5rem;
+}
+
+/* Botones comunes */
+.btn {
+    padding: 0.5rem 1.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    margin: 0.25rem;
+}
+
+/* Botón de agregar */
+.btn-primary {
+    background-color: #2196f3;
+    width: 100%;
+}
+
+/* Botón de editar */
+.btn-warning {
+    background-color: #f59e0b;
+    width: 100%;  /* Ocupa todo el contenedor */
+    margin-bottom: 0.5rem;  /* Separación entre los botones */
+}
+
+/* Botón de eliminar */
+.btn-danger {
+    background-color: #ef4444;
+    width: 100%;  /* Ocupa todo el contenedor */
+}
+
+/* Caja para los elementos listados */
+/* Caja para los elementos listados */
+.item-box {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 600px; /* Aumentar el ancho máximo del cuadro */
+    width: 100%;  /* Ocupa el 100% del contenedor disponible */
+    margin-bottom: 2rem; /* Se añadió más espacio abajo */
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2rem; /* Separar la lista de los botones */
+}
+
+
+/* Alineación de los botones dentro de .item-box */
+.item-box .btn-container {
+    display: flex;
+    flex-direction: column; /* Cambiar la dirección de los botones a columna */
+    align-items: center;  /* Centrar los botones */
+    width: 100%;  /* Asegura que ocupe todo el ancho disponible */
+    max-width: 600px;  /* Aumentar el ancho máximo de los botones */
+    margin-top: 1.5rem; /* Añadir espacio entre los intereses y los botones */
+}
+
+

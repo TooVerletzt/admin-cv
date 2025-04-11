@@ -1,0 +1,33 @@
+<div class="container-header">
+  <div class="header-form">
+    <h2 class="header-title">💼 Work Experience</h2>
+
+    <form>
+      <input type="text" class="form-input" placeholder="Start Date (mmm/yyyy)" [(ngModel)]="myWorkExperience.startDate" name="startDate">
+      <input type="text" class="form-input" placeholder="End Date (mmm/yyyy)" [(ngModel)]="myWorkExperience.endDate" name="endDate">
+      <input type="text" class="form-input" placeholder="Location" [(ngModel)]="myWorkExperience.location" name="location">
+      <input type="text" class="form-input" placeholder="Position" [(ngModel)]="myWorkExperience.position" name="position">
+      <input type="text" class="form-input" placeholder="Company" [(ngModel)]="myWorkExperience.company" name="company">
+      <input type="text" class="form-input" placeholder="Accomplishments" [(ngModel)]="myWorkExperience.accomplishments" name="accomplishments">
+
+      <div class="button-group">
+        <button type="button" class="btn btn-primary" (click)="AgregarJob()">{{ btntxt }}</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="container-header" *ngFor="let job of workExperience">
+  <div class="header-form text-center">
+    <p><strong>{{ job.company }}</strong> - {{ job.position }}</p>
+    <p>{{ job.startDate }} - {{ job.endDate }} | {{ job.location }}</p>
+    <p><em>{{ job.accomplishments }}</em></p>
+    <div class="button-group">
+      <!-- Llamar a confirmación antes de editar -->
+      <button class="btn btn-warning" (click)="confirmEdit(job)">Editar</button>
+
+      <!-- Llamar a confirmación antes de eliminar -->
+      <button class="btn btn-danger" (click)="confirmDelete(job.id)">Eliminar</button>
+    </div>
+  </div>
+</div>

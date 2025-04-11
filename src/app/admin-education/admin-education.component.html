@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="form-card">
+    <h2 class="section-title">🎓 Education</h2>
+    <input class="form-input" type="text" placeholder="Degree" [(ngModel)]="myEducation.degree" name="degree">
+    <input class="form-input" type="text" placeholder="Start Date (mm/yyyy)" [(ngModel)]="myEducation.startDate" name="startDate">
+    <input class="form-input" type="text" placeholder="End Date (mm/yyyy)" [(ngModel)]="myEducation.endDate" name="endDate">
+    <input class="form-input" type="text" placeholder="Institution" [(ngModel)]="myEducation.institution" name="institution">
+
+    <button class="btn btn-primary" (click)="AgregarEducation()">{{ btntxt }}</button>
+  </div>
+
+  <div *ngFor="let item of educationList" class="entry-card">
+    <p><strong>{{ item.degree }}</strong> - {{ item.institution }}</p>
+    <p>{{ item.startDate }} - {{ item.endDate }}</p>
+    <div class="btn-group">
+      <button class="btn btn-warning" (click)="confirmEdit(item)">Edit</button>
+      <button class="btn btn-danger" (click)="confirmDelete(item.id)">Delete</button>
+    </div>
+  </div>
+</div>
