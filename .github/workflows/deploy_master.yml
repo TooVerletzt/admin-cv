@@ -10,13 +10,13 @@ jobs:
 
     steps:
       - run: ls -la
-      
+
       - name: Checkout repo
         uses: actions/checkout@v2
-      
+
       - run: ls -la
       - run: echo 'hello world'
-      
+
       - name: Use Node.js 20.x
         uses: actions/setup-node@v1
         with:
@@ -28,11 +28,14 @@ jobs:
       - name: Build Angular app
         run: npm run build -- --configuration production
 
+      - name: List built files
+        run: ls -la dist/admin-cv/browser
+
       - name: Run httpd container
         run: docker run -d --name serving_base httpd
 
       - name: Copy Angular build to container
-        run: docker cp dist/admin-cv/. serving_base:/usr/local/apache2/htdocs
+        run: docker cp dist/admin-cv/browser/. serving_base:/usr/local/apache2/htdocs
 
       - name: List files in container
         run: docker exec serving_base ls -la /usr/local/apache2/htdocs
