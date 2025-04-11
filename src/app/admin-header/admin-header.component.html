@@ -1,0 +1,28 @@
+<div class="header-container">
+  <div class="header-form">
+    <form>
+      <h2 class="form-title">📑 Header</h2>
+      <input class="form-input" type="text" placeholder="Name" [(ngModel)]="myHeader.name" name="name">
+      <input class="form-input" type="text" placeholder="Goal" [(ngModel)]="myHeader.goalLife" name="goalLife">
+      <input class="form-input" type="text" placeholder="Photo URL" [(ngModel)]="myHeader.photoUrl" name="photoUrl">
+      <input class="form-input" type="text" placeholder="Email" [(ngModel)]="myHeader.email" name="email">
+      <input class="form-input" type="text" placeholder="Phone" [(ngModel)]="myHeader.phoneNumber" name="phoneNumber">
+      <input class="form-input" type="text" placeholder="Location" [(ngModel)]="myHeader.location" name="location">
+      <input class="form-input" type="text" placeholder="Social Network" [(ngModel)]="myHeader.socialNetwork" name="socialNetwork">
+      <input class="btn btn-primary full-width" type="button" [value]="btntxt" (click)="AgregarHeader()">
+    </form>
+  </div>
+
+  <div class="header-list">
+    <div *ngFor="let item of headerList" class="header-item">
+      <p><strong>{{ item.name }}</strong> - {{ item.email }}</p>
+      <div class="btn-group">
+        <!-- Eliminar con confirmación -->
+        <input class="btn btn-danger" type="button" value="Delete" (click)="confirmDelete(item.id)">
+        
+        <!-- Editar con confirmación -->
+        <input class="btn btn-warning" type="button" value="Edit" (click)="confirmEdit(item)">
+      </div>
+    </div>
+  </div>
+  

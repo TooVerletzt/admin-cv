@@ -1,0 +1,55 @@
+/* Títulos principales */
+h1 {
+    font-size: 4rem; /* Aumenta el tamaño del texto */
+    font-weight: 700; /* Aumenta el grosor de la fuente */
+    color: #2e3b4e; /* Color oscuro */
+    text-align: center;
+    margin-top: 20px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Sombra suave */
+    padding-bottom: 10px; /* Añade espacio debajo del título */
+    border-bottom: 2px solid #e6a72d; /* Agrega una línea debajo */
+  }
+  
+  /* Estilo de los enlaces en la barra de navegación */
+  nav ul li a {
+    color: #2e3b4e; /* Color de texto */
+    text-decoration: none;
+    font-size: 1.2rem; /* Aumenta el tamaño de los enlaces */
+    font-family: 'Arial', sans-serif;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease; /* Suaviza la transición */
+  }
+  
+  nav ul li a:hover {
+    background-color: #e6a72d; /* Cambio de color al pasar el ratón */
+    color: #ffffff; /* Cambio de color de texto al pasar el ratón */
+  }
+  
+  /* Títulos de secciones dentro de la página */
+  section h2 {
+    font-size: 2.5rem; /* Aumenta el tamaño del texto */
+    font-weight: bold;
+    color: #2e3b4e;
+    margin-top: 30px;
+    text-align: left;
+    text-transform: uppercase; /* Hace el texto en mayúsculas */
+    letter-spacing: 1px; /* Espaciado entre letras */
+    border-left: 5px solid #e6a72d; /* Línea de color en la izquierda */
+    padding-left: 15px; /* Espacio entre la línea y el texto */
+  }
+  
+  /* Estilo para la barra de navegación */
+  nav {
+    background-color: #ffffff; /* Fondo blanco para la barra de navegación */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra suave para la barra */
+    padding: 20px 0; /* Añadir relleno arriba y abajo */
+  }
+  
+  /* Estilo para los elementos de lista dentro de nav */
+  nav ul li {
+    margin: 0 20px;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  

@@ -1,0 +1,46 @@
+<div class="container color-light">
+  <div class="col">
+
+    <!-- FORMULARIO + TÍTULO DENTRO DEL RECUADRO -->
+    <div class="form-box">
+      <h2 class="header-title">🌍 Languages</h2>
+      <form>
+        <input
+          type="text"
+          class="form-input"
+          name="language"
+          placeholder="Language"
+          [(ngModel)]="myLanguages.languages"
+        />
+        <button 
+          type="button" 
+          class="btn btn-primary" 
+          (click)="AgregarLanguage()"
+        >
+          {{ btntxt }}
+        </button>
+      </form>
+    </div>
+
+    <!-- IDIOMAS REGISTRADOS -->
+    <div 
+      class="item-box" 
+      *ngFor="let language of languagesList"
+    >
+      <p>{{ language.languages }}</p>
+      <button 
+        class="btn btn-warning" 
+        (click)="confirmEdit(language)"
+      >
+        Editar
+      </button>
+      <button 
+        class="btn btn-danger" 
+        (click)="confirmDelete(language.id)"
+      >
+        Eliminar
+      </button>
+    </div>
+  </div>
+</div>
+

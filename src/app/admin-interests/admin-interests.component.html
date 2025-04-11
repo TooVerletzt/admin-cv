@@ -1,0 +1,39 @@
+<div class="container color-light">
+  <div class="col">
+    <div class="form-box">
+      <h2 class="header-title">⭐ Interests</h2>
+      <form>
+        <input 
+          type="text" 
+          class="form-input" 
+          placeholder="Interest" 
+          [(ngModel)]="myInterests.interests" 
+          name="interests"
+        />
+        <button 
+          type="button" 
+          class="btn btn-primary" 
+          (click)="AgregarInterest()"
+        >
+          {{ btntxt }}
+        </button>
+      </form>
+    </div>
+
+    <div class="item-box" *ngFor="let interest of interestsList">
+      <p *ngFor="let i of interest.interests.split(',')">{{ i.trim() }}</p>
+      <button 
+        class="btn btn-warning" 
+        (click)="confirmEdit(interest)"
+      >
+        Editar
+      </button>
+      <button 
+        class="btn btn-danger" 
+        (click)="confirmDeleteInterest(interest)"
+      >
+        Eliminar
+      </button>
+    </div>
+  </div>
+</div>

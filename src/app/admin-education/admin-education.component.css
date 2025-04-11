@@ -1,0 +1,78 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #e5f6fd;
+    min-height: 100vh;
+    padding: 30px;
+  }
+  
+  .form-card {
+    background-color: #fff;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 500px;
+    margin-bottom: 32px;
+  }
+  
+  .section-title {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .form-input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    border: 2px solid #27374D;
+    font-size: 14px;
+  }
+  
+  .btn {
+    width: 100%;
+    padding: 12px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .btn-primary {
+    background-color: #2196f3;
+    color: white;
+  }
+  
+  .btn-warning {
+    background-color: #f9a825;
+    color: white;
+    width: 49%;
+  }
+  
+  .btn-danger {
+    background-color: #f44336;
+    color: white;
+    width: 49%;
+  }
+  
+  .entry-card {
+    background-color: white;
+    padding: 16px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 500px;
+    margin-bottom: 16px;
+    text-align: center;
+  }
+  
+  .btn-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+  
