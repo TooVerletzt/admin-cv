@@ -32,7 +32,13 @@ jobs:
         run: ls -la dist/admin-cv/browser
 
       - name: Run httpd container
-        run: docker run -d --name serving_base httpd
+        run: |
+          docker rm -f serving_base || true
+          docker run -d --name serving_base httpd
+          docker ps -a
+
+      - name: Verifica contenedor
+        run: docker inspect serving_base
 
       - name: Copy Angular build to container
         run: docker cp dist/admin-cv/browser/. serving_base:/usr/local/apache2/htdocs
