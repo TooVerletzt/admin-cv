@@ -9,55 +9,61 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - run: ls -la
+      - name: Mostrar archivos iniciales
+        run: ls -la
 
-      - name: Checkout repo
+      - name: Clonar repositorio
         uses: actions/checkout@v2
 
-      - run: ls -la
-      - run: echo 'hello world'
+      - name: Confirmar archivos clonados
+        run: ls -la
 
-      - name: Use Node.js 20.x
+      - name: Hello World
+        run: echo 'hello world'
+
+      - name: Configurar Node.js 20.x
         uses: actions/setup-node@v1
         with:
           node-version: 20.x
 
-      - name: Install dependencies
+      - name: Instalar dependencias
         run: npm install
 
-      - name: Build Angular app
+      - name: Compilar app Angular en modo producción
         run: npm run build -- --configuration production
 
-      - name: List built files
+      - name: Verificar archivos generados
         run: ls -la dist/admin-cv/browser
 
-      - name: Run httpd container
+      - name: Ejecutar contenedor httpd limpio
         run: |
           docker rm -f serving_base || true
           docker run -d --name serving_base httpd
           docker ps -a
 
-      - name: Verifica contenedor
-        run: docker inspect serving_base
+      - name: Verificar que el contenedor esté activo
+        run: |
+          docker inspect serving_base || (echo '❌ Error: El contenedor serving_base no existe.' && exit 1)
 
-      - name: Copy Angular build to container
+      - name: Copiar build Angular al contenedor
         run: docker cp dist/admin-cv/browser/. serving_base:/usr/local/apache2/htdocs
 
-      - name: List files in container
+      - name: Listar archivos dentro del contenedor
         run: docker exec serving_base ls -la /usr/local/apache2/htdocs
 
-      - name: Build Docker image (production)
-        run: docker commit --change "ENV MODEL_NAME ${{ secrets.MODEL_NAME }}" \
-              serving_base ${{ secrets.DOCKER_USER }}/${{ secrets.MODEL_NAME }}:${{ github.sha }}
+      - name: Crear imagen Docker (producción)
+        run: |
+          docker commit --change "ENV MODEL_NAME ${{ secrets.MODEL_NAME }}" \
+            serving_base ${{ secrets.DOCKER_USER }}/${{ secrets.MODEL_NAME }}:${{ github.sha }}
 
-      - name: Show Docker images
+      - name: Mostrar imágenes Docker locales
         run: docker images
 
-      - name: Docker login
+      - name: Login en DockerHub
         env:
           DOCKER_USER: ${{ secrets.DOCKER_USER }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
 
-      - name: Push Docker image to DockerHub
+      - name: Enviar imagen Docker a DockerHub
         run: docker push ${{ secrets.DOCKER_USER }}/${{ secrets.MODEL_NAME }}:${{ github.sha }}
