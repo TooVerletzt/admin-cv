@@ -1,0 +1,58 @@
+name: CI/CD deploy release
+
+on:
+  push:
+    branches: [ "release" ]
+
+jobs:
+  ci_cd_deploy_release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - run: ls -la
+
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - run: ls -la
+      - run: echo 'hello from release!'
+
+      - name: Use Node.js 20.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 20.x
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Angular app
+        run: npm run build -- --configuration production
+
+      - name: List built files
+        run: ls -la dist/admin-cv/browser
+
+      - name: Run httpd container
+        run: docker run -d --name serving_base httpd
+
+      - name: Copy Angular build to container
+        run: docker cp dist/admin-cv/browser/. serving_base:/usr/local/apache2/htdocs
+
+      - name: List files in container
+        run: docker exec serving_base ls -la /usr/local/apache2/htdocs
+
+      - name: Build Docker image (test)
+        run: docker commit --change "ENV MODEL_NAME ${{ secrets.MODEL_NAME }}" \
+              serving_base ${{ secrets.DOCKER_USER }}/${{ secrets.MODEL_NAME }}:test-${{ github.sha }}
+
+      - name: Show Docker images
+        run: docker images
+
+      - name: Docker login
+        env:
+          DOCKER_USER: ${{ secrets.DOCKER_USER }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+
+      - name: Push Docker image to DockerHub
+        run: docker push ${{ secrets.DOCKER_USER }}/${{ secrets.MODEL_NAME }}:test-${{ github.sha }}
+

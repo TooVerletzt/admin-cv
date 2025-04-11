@@ -1,0 +1,69 @@
+name: CI/CD deploy master
+
+on: 
+  push:
+    branches: [ "master" ]
+
+jobs:
+  ci_cd_deploy_master:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Mostrar archivos iniciales
+        run: ls -la
+
+      - name: Clonar repositorio
+        uses: actions/checkout@v2
+
+      - name: Confirmar archivos clonados
+        run: ls -la
+
+      - name: Hello World
+        run: echo 'hello world'
+
+      - name: Configurar Node.js 20.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 20.x
+
+      - name: Instalar dependencias
+        run: npm install
+
+      - name: Compilar app Angular en modo producción
+        run: npm run build -- --configuration production
+
+      - name: Verificar archivos generados
+        run: ls -la dist/admin-cv/browser
+
+      - name: Ejecutar contenedor httpd limpio
+        run: |
+          docker rm -f serving_base || true
+          docker run -d --name serving_base httpd
+          docker ps -a
+
+      - name: Verificar que el contenedor esté activo
+        run: |
+          docker inspect serving_base || (echo '❌ Error: El contenedor serving_base no existe.' && exit 1)
+
+      - name: Copiar build Angular al contenedor
+        run: docker cp dist/admin-cv/browser/. serving_base:/usr/local/apache2/htdocs
+
+      - name: Listar archivos dentro del contenedor
+        run: docker exec serving_base ls -la /usr/local/apache2/htdocs
+
+      - name: Crear imagen Docker (producción)
+        run: |
+          docker commit --change "ENV MODEL_NAME ${{ secrets.MODEL_NAME }}" \
+            serving_base ${{ secrets.DOCKER_USER }}/${{ secrets.MODEL_NAME }}:${{ github.sha }}
+
+      - name: Mostrar imágenes Docker locales
+        run: docker images
+
+      - name: Login en DockerHub
+        env:
+          DOCKER_USER: ${{ secrets.DOCKER_USER }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+
+      - name: Enviar imagen Docker a DockerHub
+        run: docker push ${{ secrets.DOCKER_USER }}/${{ secrets.MODEL_NAME }}:${{ github.sha }}
